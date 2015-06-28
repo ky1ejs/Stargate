@@ -1,5 +1,5 @@
 # Stargate
-Attempting to make deep linking in iOS with Swift, simpler
+Attempting to make deep linking in iOS with Swift, simpler. Work in progress.
 
 ## Usage
 
@@ -39,3 +39,7 @@ If your ViewController or object that you'd like to handle the deep link does no
 
 You can also use the delegate to setup view heriarchy when a ViewController exists but its view is not on the screen. To do this just return `false` in the `RouterCallback`, like in the example above, which will cause the `DeepLinkRouter` to call the delegate. The delegate gets passed the url, therefore it knows which ViewController to get on screen.
 
+## Todo
+
+-[ ] Make delegate pointer, weak (means moving to instance functions)
+-[ ] Some kind of regex thing for router string
