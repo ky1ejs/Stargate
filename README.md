@@ -23,7 +23,7 @@ func routerCallback(params: DeepLinkParams) -> Bool {
     // Do some rad crap
     return true
   } else {
-    // Returning false will make DeepLinkRouter call delegate (if there is on, of course)
+    // Returning false will make DeepLinkRouter call delegate (if there is one, of course)
     return false
   }
 }
