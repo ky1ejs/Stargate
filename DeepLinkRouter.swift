@@ -9,12 +9,12 @@ import UIKit
 typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject?)
 typealias RouterCallback = DeepLinkParams -> Bool
 
-protocol DeepLinkRouterDelegate {
+protocol DeepLinkRouterDelegate : class {
     func catchDeepLink(DeepLinkParams) -> Bool
 }
 
 private var callbacks = [String : RouterCallback]()
-private var delegate : DeepLinkRouterDelegate?
+private weak var delegate : DeepLinkRouterDelegate?
 
 class DeepLinkRouter {
     static func setCallback(callback: RouterCallback?, forRoute route: String) {
