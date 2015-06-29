@@ -28,7 +28,6 @@ class DeepLinkRouter {
     static func handleDeepLink(params: DeepLinkParams) -> Bool {
         if let host = params.url.host, path = params.url.path {
             let router = "\(host)\(path)"
-            let callback = callbacks[router]
             return (callbacks[router]?(params) ?? delegate?.catchDeepLink(params) ?? false)
         }
         return false
