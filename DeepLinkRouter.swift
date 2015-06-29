@@ -1,7 +1,7 @@
 //
 //  DeepLinkRouter.swift
 //
-//  Created by Kyle McAlpine on 28/06/2015.
+//  Created by Kyle McAlpine and Daniel Tomlinson on 28/06/2015.
 //
 
 import UIKit
