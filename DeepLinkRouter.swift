@@ -13,22 +13,33 @@ protocol DeepLinkRouterDelegate : class {
     func catchDeepLink(DeepLinkParams) -> Bool
 }
 
-private var callbacks = [String : RouterCallback]()
+private var routes = [RouteRegex : Route]()
 private weak var delegate : DeepLinkRouterDelegate?
 
 class DeepLinkRouter {
-    static func setCallback(callback: RouterCallback?, forRoute route: String) {
-        callbacks[route] = callback
+    static func setRoute(route: Route) {
+        routes[route.regex] = route
     }
     
-    static func callbackForRoute(route: String) -> RouterCallback? {
-        return callbacks[route]
+    static func unsetRoute(route: Route) {
+        routes[route.regex] = nil
+    }
+    
+    static func callbackForRoute(regex: RouteRegex) -> Route? {
+        return routes[regex]
     }
     
     static func handleDeepLink(params: DeepLinkParams) -> Bool {
         if let host = params.url.host, path = params.url.path {
-            let router = "\(host)\(path)"
-            return (callbacks[router]?(params) ?? delegate?.catchDeepLink(params) ?? false)
+            let link = "\(host)\(path)"
+            for route in routes.values {
+                var error : NSError?
+                let regex = NSRegularExpression(pattern: route.regex, options: .CaseInsensitive, error: &error)
+                if regex?.numberOfMatchesInString(link, options: nil, range: NSMakeRange(0, count(link))) > 0 {
+                    return route.callback(params)
+                }
+            }
+            return delegate?.catchDeepLink(params) ?? false
         }
         return false
     }
