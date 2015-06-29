@@ -43,3 +43,9 @@ You can also use the delegate to setup view heriarchy when a ViewController exis
 
 - [ ] Make delegate pointer, weak (means moving to instance functions)
 - [ ] Some kind of regex thing for router string
+- 
+
+## Authors
+
+- [Kyle McAlpine](http:kylejm.io)
+- [Daniel Tomlinson](http://danie.lt)
