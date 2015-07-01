@@ -8,8 +8,8 @@
 
 import UIKit
 
-typealias RouteRegex = String
-struct Route {
+public typealias RouteRegex = String
+public struct Route {
     let regex : RouteRegex
     let callback : RouterCallback
     init(regex: RouteRegex, callback: RouterCallback) {

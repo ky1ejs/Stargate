@@ -6,30 +6,30 @@
 
 import UIKit
 
-typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject?)
-typealias RouterCallback = DeepLinkParams -> Bool
+public typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject?)
+public typealias RouterCallback = DeepLinkParams -> Bool
 
-protocol DeepLinkRouterDelegate : class {
-    func catchDeepLink(DeepLinkParams) -> Bool
+public protocol DeepLinkRouterDelegate : class {
+     func catchDeepLink(DeepLinkParams) -> Bool
 }
 
 private var routes = [RouteRegex : Route]()
 private weak var delegate : DeepLinkRouterDelegate?
 
-class DeepLinkRouter {
-    static func setRoute(route: Route) {
+public class DeepLinkRouter {
+    public static func setRoute(route: Route) {
         routes[route.regex] = route
     }
     
-    static func unsetRoute(route: Route) {
+    public static func unsetRoute(route: Route) {
         routes[route.regex] = nil
     }
     
-    static func callbackForRoute(regex: RouteRegex) -> Route? {
+    public static func callbackForRoute(regex: RouteRegex) -> Route? {
         return routes[regex]
     }
     
-    static func handleDeepLink(params: DeepLinkParams) -> Bool {
+    public static func handleDeepLink(params: DeepLinkParams) -> Bool {
         if let host = params.url.host, path = params.url.path {
             let link = "\(host)\(path)"
             for route in routes.values {
