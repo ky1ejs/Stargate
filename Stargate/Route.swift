@@ -12,7 +12,7 @@ public typealias RouteRegex = String
 public struct Route {
     let regex : RouteRegex
     let callback : RouterCallback
-    init(regex: RouteRegex, callback: RouterCallback) {
+    public init(regex: RouteRegex, callback: RouterCallback) {
         self.regex = regex
         self.callback = callback
     }
