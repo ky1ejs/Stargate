@@ -1,21 +1,39 @@
 # Stargate
+
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version](https://img.shields.io/github/release/kylejm/Stargate.svg)](https://github.com/kylejm/Stargate/releases)
+
 Attempting to make deep linking in iOS with Swift, simpler. Work in progress.
 
 ## Usage
 
 In `AppDelegate.swift`:
 
-``` swift
+
+DeepLink:
+
+```swift
 func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-  return DeepLinkRouter.handleDeepLink(url: url, sourceApplication: sourceApplication, annotation: annotation)
+  return Router.handleDeepLink(url: url, sourceApplication: sourceApplication, annotation: annotation)
 }
 ```
 
-Registering for deep link:
+Notification:
+
+```swift
+func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+  // Called when foreground or background but not suspended
+  Router.handleNotification(userInfo)
+  completionHandler(.NoData)
+}
+```
+
+<br>
+<br>
+### Registering for DeepLink:
 
 ``` swift
 // Matches myapp://cool/ass/stuff
-DeepLinkRouter.setCallback(self.routerCallback, forRoute: "cool/ass/stuff")
+Router.setRoute(Route(regex: "cool/ass/stuff", callback: .DeepLink(self.routerCallback)))
 
 func routerCallback(params: DeepLinkParams) -> Bool {
   if self.view.window != nil {
@@ -33,15 +51,32 @@ func routerCallback(params: DeepLinkParams) -> Bool {
 ```swift
 typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject?)
 ```
+
+<br>
+<br>
+### Registering for a Notification:
+
+Pretty much the same as DeepLink.
+
+```swift
+Router.setRoute(Route(regex: "cool/ass/stuff", callback: .Notification(self.routerCallback)))
+```
+
+Params passed to `routerCallback`:
+
+```swift
+public typealias NotificationParams = [NSObject : AnyObject]
+```
+
 ## The delegate
 
-If your ViewController or object that you'd like to handle the deep link does not exist at the time of the deep link being opened, you can have a delegate that will definately be around (AppDelegate for example) catch the deep link and do any setup, like instantiate the ViewController and re-setup its views, for the ViewController or object to handle it.
+If your ViewController or object that you'd like to handle the `Route` does not exist at the time of the deep link being opened, you can have a delegate that will definately be around (AppDelegate for example) catch the `Route` and do any setup, like, for example, instantiate a ViewController and re-setup its views then call it's `RouteCallback`.
 
-You can also use the delegate to setup view heriarchy when a ViewController exists but its view is not on the screen. To do this just return `false` in the `RouterCallback`, like in the example above, which will cause the `DeepLinkRouter` to call the delegate. The delegate gets passed the url, therefore it knows which ViewController to get on screen.
+You can also use the delegate to setup view heriarchy when a ViewController exists but its view is not on the screen. To do this just return `false` in the `RouterCallback`, like in the example above, which will cause the `DeepLinkRouter` to call the delegate. The delegate gets passed the `Route`, therefore it knows which ViewController to get on screen.
 
 ## Todo
 
-- [ ] Some kind of regex thing for router string
+- [x] Some kind of regex thing for router string
 - [x] Fix delegate pointer strength 
 
 ## Authors
