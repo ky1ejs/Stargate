@@ -12,15 +12,15 @@ public typealias DeepLinkCallback = DeepLinkParams -> Bool
 public typealias NotificationParams = [String : AnyObject]
 public typealias NotificationCallback = (NotificationParams) -> ()
 
-public protocol DeepLinkRouterDelegate: class {
+public protocol RouterDelegate: class {
     func catchDeepLink(params: DeepLinkParams) -> Bool
     func catchNotification(params: NotificationParams)
 }
 
 private var routes = [RouteRegex : Route]()
-private weak var delegate : DeepLinkRouterDelegate?
+private weak var delegate : RouterDelegate?
 
-public class DeepLinkRouter {
+public class Router {
     public static func setRoute(route: Route) {
         routes[route.regex] = route
     }
@@ -67,5 +67,22 @@ public class DeepLinkRouter {
             }
         }
         delegate?.catchNotification(userInfo)
+    }
+}
+
+
+public typealias RouteRegex = String
+
+public enum RouteCallback {
+    case DeepLink(DeepLinkCallback)
+    case Notification(NotificationCallback)
+}
+
+public struct Route {
+    let regex : RouteRegex
+    let callback : RouteCallback
+    public init(regex: RouteRegex, callback: RouteCallback) {
+        self.regex = regex
+        self.callback = callback
     }
 }
