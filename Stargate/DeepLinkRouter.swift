@@ -13,8 +13,8 @@ public typealias NotificationParams = [String : AnyObject]
 public typealias NotificationCallback = (NotificationParams) -> ()
 
 public protocol DeepLinkRouterDelegate: class {
-    func catchDeepLink(DeepLinkParams) -> Bool
-    func catchNotification(NotificationParams)
+    func catchDeepLink(params: DeepLinkParams) -> Bool
+    func catchNotification(params: NotificationParams)
 }
 
 private var routes = [RouteRegex : Route]()
