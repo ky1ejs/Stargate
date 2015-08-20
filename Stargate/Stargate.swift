@@ -9,12 +9,12 @@ import UIKit
 
 public typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject?)
 public typealias DeepLinkCallback = DeepLinkParams -> Bool
-public typealias NotificationParams = [String : AnyObject]
+public typealias NotificationParams = [NSObject : AnyObject]
 public typealias NotificationCallback = (NotificationParams) -> ()
 
 public protocol RouterDelegate: class {
     func catchDeepLink(params: DeepLinkParams) -> Bool
-    func catchNotification(params: NotificationParams)
+    func catchNotification(userInfo: NotificationParams)
 }
 
 private var routes = [RouteRegex : Route]()
@@ -52,7 +52,7 @@ public class Router {
         return false
     }
     
-    public static func handleNotification(userInfo: [String : AnyObject]) {
+    public static func handleNotification(userInfo: NotificationParams) {
         if let notification = userInfo["Notifications"] as? String {
             for route in routes.values {
                 switch route.callback {
