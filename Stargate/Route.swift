@@ -2,17 +2,23 @@
 //  Route.swift
 //  Loot
 //
-//  Created by Kyle McAlpine on 29/06/2015.
-//  Copyright (c) 2015 Loot Financial Services Ltd. All rights reserved.
+//  Created by Kyle McAlpine and Daniel Tomlinson on 28/06/2015..
+//  Copyright (c) Kyle McAlpine and Daniel Tomlinson. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public typealias RouteRegex = String
+
+public enum RouteCallback {
+    case DeepLink(DeepLinkCallback)
+    case Notification(NotificationCallback)
+}
+
 public struct Route {
     let regex : RouteRegex
-    let callback : RouterCallback
-    public init(regex: RouteRegex, callback: RouterCallback) {
+    let callback : RouteCallback
+    public init(regex: RouteRegex, callback: RouteCallback) {
         self.regex = regex
         self.callback = callback
     }
