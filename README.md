@@ -2,7 +2,7 @@
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version](https://img.shields.io/github/release/kylejm/Stargate.svg)](https://github.com/kylejm/Stargate/releases)
 
-Attempting to make deep linking in iOS with Swift, simpler. Work in progress.
+Attempting to make deeplinking and handling notifications (remote and local) on iOS with Swift, simpler. Work in progress.
 
 ## Usage
 
