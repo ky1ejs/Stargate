@@ -62,7 +62,7 @@ public class Router {
     }
     
     public static func handleNotification(userInfo: NotificationParams) {
-        if let notification = userInfo[notificationKey] as? String {
+        if let payload = userInfo["aps"] as? [NSObject : AnyObject], notification = payload[notificationKey] as? String {
             for route in routes.values {
                 switch route.callback {
                 case let .Notification(callback):
