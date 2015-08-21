@@ -28,7 +28,6 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 ```
 
 <br>
-<br>
 ### Registering for DeepLink:
 
 ``` swift
@@ -53,7 +52,6 @@ typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: 
 ```
 
 <br>
-<br>
 ### Registering for a Notification:
 
 Pretty much the same as DeepLink.
@@ -67,9 +65,9 @@ This would be called for this notification:
 ```json
 {
   "aps": {
-    "alert": "message"
-    "sound": "default"
-    "badge": "1"
+    "alert": "message",
+    "sound": "default",
+    "badge": "1",
     "notification_id": "cool_ass_stuff"
   }
 }
@@ -89,7 +87,6 @@ Params passed to `routerCallback`:
 public typealias NotificationParams = [NSObject : AnyObject]
 ```
 
-<br>
 <br>
 ### Warning!
 
