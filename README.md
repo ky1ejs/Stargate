@@ -59,7 +59,20 @@ typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: 
 Pretty much the same as DeepLink.
 
 ```swift
-Router.setRoute(Route(regex: "notification-regex", callback: .Notification(self.routerCallback)))
+Router.setRoute(Route(regex: "^cool_ass_stuff$", callback: .Notification(self.routerCallback)))
+```
+
+This would be called for this notification:
+
+```json
+{
+  "aps": {
+    "alert": "message"
+    "sound": "default"
+    "badge": "1"
+    "notification_id": "cool_ass_stuff"
+  }
+}
 ```
 
 The regex is compared on a string in the notification payload. By default the key for this string is `"notification_id"`. You can change this by:
@@ -74,6 +87,20 @@ Params passed to `routerCallback`:
 
 ```swift
 public typealias NotificationParams = [NSObject : AnyObject]
+```
+
+<br>
+<br>
+### Warning!
+
+Remember to remove your callback when your object get's `deinit`ed:
+
+```swift
+let notificationRouteRegex = "^cool_ass_stuff$"
+
+deinit {
+  Router.unsetRoute(self.notificationRouteRegex)
+}
 ```
 
 <br>
