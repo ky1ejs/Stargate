@@ -59,14 +59,14 @@ typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: 
 Pretty much the same as DeepLink.
 
 ```swift
-Router.setRoute(Route(regex: "notification-id", callback: .Notification(self.routerCallback)))
+Router.setRoute(Route(regex: "notification-regex", callback: .Notification(self.routerCallback)))
 ```
 
-The regex is compared on a string in the notification payload. By default the key for this string is `"NotificationID"`. You can change this by:
+The regex is compared on a string in the notification payload. By default the key for this string is `"notification_id"`. You can change this by:
 
 ```swift
 func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-  Router.setNotificationKey("YourKey")
+  Router.setNotificationKey("your_key")
 }
 ```
 
