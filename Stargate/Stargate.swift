@@ -18,7 +18,8 @@ public protocol RouterDelegate: class {
 }
 
 private var routes = [RouteRegex : Route]()
-private weak var delegate : RouterDelegate?
+private weak var delegate: RouterDelegate?
+private var notificationKey = "NotificationID"
 
 public class Router {
     public static func setRoute(route: Route) {
@@ -35,6 +36,10 @@ public class Router {
     
     public static func callbackForRoute(regex: RouteRegex) -> Route? {
         return routes[regex]
+    }
+    
+    public static func setNotificationKey(key: String) {
+        notificationKey = key
     }
     
     public static func handleDeepLink(params: DeepLinkParams) -> Bool {
@@ -57,7 +62,7 @@ public class Router {
     }
     
     public static func handleNotification(userInfo: NotificationParams) {
-        if let notification = userInfo["Notifications"] as? String {
+        if let notification = userInfo[notificationKey] as? String {
             for route in routes.values {
                 switch route.callback {
                 case let .Notification(callback):
