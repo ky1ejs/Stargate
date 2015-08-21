@@ -26,7 +26,11 @@ public class Router {
     }
     
     public static func unsetRoute(route: Route) {
-        routes[route.regex] = nil
+        unsetRoute(route.regex)
+    }
+    
+    public static func unsetRoute(routeRegex: RouteRegex) {
+        routes[routeRegex] = nil
     }
     
     public static func callbackForRoute(regex: RouteRegex) -> Route? {
