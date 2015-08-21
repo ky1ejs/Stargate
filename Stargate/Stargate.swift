@@ -19,7 +19,7 @@ public protocol RouterDelegate: class {
 
 private var routes = [RouteRegex : Route]()
 private weak var delegate: RouterDelegate?
-private var notificationKey = "NotificationID"
+private var notificationKey = "notification_id"
 
 public class Router {
     public static func setRoute(route: Route) {
