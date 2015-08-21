@@ -59,7 +59,15 @@ typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: 
 Pretty much the same as DeepLink.
 
 ```swift
-Router.setRoute(Route(regex: "cool/ass/stuff", callback: .Notification(self.routerCallback)))
+Router.setRoute(Route(regex: "notification-id", callback: .Notification(self.routerCallback)))
+```
+
+The regex is compared on a string in the notification payload. By default the key for this string is `"NotificationID"`. You can change this by:
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  Router.setNotificationKey("YourKey")
+}
 ```
 
 Params passed to `routerCallback`:
@@ -68,6 +76,7 @@ Params passed to `routerCallback`:
 public typealias NotificationParams = [NSObject : AnyObject]
 ```
 
+<br>
 ## The delegate
 
 If your ViewController or object that you'd like to handle the `Route` does not exist at the time of the deep link being opened, you can have a delegate that will definately be around (AppDelegate for example) catch the `Route` and do any setup, like, for example, instantiate a ViewController and re-setup its views then call it's `RouteCallback`.
