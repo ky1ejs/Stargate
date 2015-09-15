@@ -109,6 +109,7 @@ public struct Route {
     let regex : RouteRegex
     let callback : RouteCallback
     
+    // Annoyingly, this init has to be here to explicitly make it public
     public init(regex: RouteRegex, callback: RouteCallback) {
         self.regex = regex
         self.callback = callback
