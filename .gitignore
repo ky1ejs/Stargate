@@ -24,3 +24,5 @@ xcuserdata
 
 ## Carthage
 Carthage/
+*.zip
+
