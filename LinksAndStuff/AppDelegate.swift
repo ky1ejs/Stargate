@@ -10,7 +10,7 @@ import UIKit
 import Stargate
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, RouterDelegate {
 
     var window: UIWindow?
 
@@ -42,8 +42,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    
+    // MARK: Stargate stuff
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
         return Router.handleDeepLink(url: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+    
+    func catchDeepLink(deepLink: DeepLink) -> Bool {
+        if deepLink.matchesRegex("^some/rad/shit$") {
+            // Show a view controller or something
+            return true
+        }
+        return true
+    }
+    
+    func catchNotification(notification: Notification) {
+        
     }
 }
 
