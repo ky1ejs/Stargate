@@ -4,6 +4,8 @@
 
 Attempting to make deeplinking and handling notifications (remote and local) on iOS with Swift, simpler. Work in progress.
 
+Swift 2 since v0.3
+
 ## Usage
 
 In `AppDelegate.swift`:
@@ -12,7 +14,7 @@ In `AppDelegate.swift`:
 DeepLink:
 
 ```swift
-func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
   return Router.handleDeepLink(url: url, sourceApplication: sourceApplication, annotation: annotation)
 }
 ```
