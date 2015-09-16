@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, RouterDelegate {
     
     
     // MARK: Stargate stuff
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         return Router.handleDeepLink(url: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     

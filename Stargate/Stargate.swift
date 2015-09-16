@@ -22,8 +22,8 @@ public struct DeepLink: Regexable {
     public func matchesRegex(regex: RouteRegex) -> Bool {
         if let host = self.params.url.host, path = self.params.url.path {
             let link = "\(host)\(path)"
-            let regex = NSRegularExpression(pattern: regex, options: .CaseInsensitive, error: nil)
-            if regex?.numberOfMatchesInString(link, options: nil, range: NSMakeRange(0, count(link))) > 0 {
+            let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
+            if regex?.numberOfMatchesInString(link, options: [], range: NSMakeRange(0, link.characters.count)) > 0 {
                 return true
             }
         }
@@ -36,8 +36,8 @@ public struct Notification: Regexable {
     
     public func matchesRegex(regex: RouteRegex) -> Bool {
         if let payload = self.params["aps"] as? [NSObject : AnyObject], notification = payload[notificationKey] as? String {
-            let regex = NSRegularExpression(pattern: regex, options: .CaseInsensitive, error: nil)
-            if regex?.numberOfMatchesInString(notification, options: nil, range: NSMakeRange(0, count(notification))) > 0 {
+            let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
+            if regex?.numberOfMatchesInString(notification, options: [], range: NSMakeRange(0, notification.characters.count)) > 0 {
                 return true
             }
         }
