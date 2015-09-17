@@ -7,7 +7,7 @@
 
 import UIKit
 
-public typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject?)
+public typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject)
 public typealias DeepLinkCallback = DeepLinkParams -> Bool
 public typealias NotificationParams = [NSObject : AnyObject]
 public typealias NotificationCallback = (NotificationParams) -> ()
