@@ -4,7 +4,7 @@
 
 Attempting to make deeplinking and handling notifications (remote and local) on iOS with Swift, simpler. Work in progress.
 
-Swift 2 since v0.3
+**Swift 2 since v0.3**
 
 ## Usage
 
