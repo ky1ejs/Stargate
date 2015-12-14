@@ -17,7 +17,7 @@ public protocol Regexable {
 }
 
 public struct DeepLink: Regexable {
-    let params: DeepLinkParams
+    public let params: DeepLinkParams
     
     public func matchesRegex(regex: RouteRegex) -> Bool {
         if let host = self.params.url.host, path = self.params.url.path {
@@ -32,7 +32,7 @@ public struct DeepLink: Regexable {
 }
 
 public struct Notification: Regexable {
-    let params: NotificationParams
+    public let params: NotificationParams
     
     public func matchesRegex(regex: RouteRegex) -> Bool {
         if let payload = self.params["aps"] as? [NSObject : AnyObject], notification = payload[notificationKey] as? String {
