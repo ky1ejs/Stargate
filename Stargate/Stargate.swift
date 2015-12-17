@@ -50,8 +50,8 @@ public protocol RouterDelegate: class {
     func catchNotification(notification: Notification)
 }
 
+public weak var delegate: RouterDelegate?
 private var routes = [RouteRegex : Route]()
-private weak var delegate: RouterDelegate?
 private var notificationKey = "notification_id"
 
 public class Router {
