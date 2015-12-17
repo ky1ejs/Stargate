@@ -71,8 +71,8 @@ public class Router {
         for route in routes.values {
             switch route.callback {
             case let .DeepLink(callback):
-                if deepLink.matchesRegex(route.regex) {
-                    return callback(params)
+                if deepLink.matchesRegex(route.regex) && callback(params) {
+                    return true
                 }
             default:
                 break
