@@ -50,11 +50,12 @@ public protocol RouterDelegate: class {
     func catchNotification(notification: Notification)
 }
 
-public weak var delegate: RouterDelegate?
 private var routes = [RouteRegex : Route]()
 private var notificationKey = "notification_id"
 
 public class Router {
+    public static weak var delegate: RouterDelegate?
+    
     public static func setRoute(route: Route) { routes[route.regex] = route }
     
     public static func unsetRoute(route: Route) { unsetRoute(route.regex) }
@@ -77,7 +78,7 @@ public class Router {
                 break
             }
         }
-        return delegate?.catchDeepLink(deepLink) ?? false
+        return self.delegate?.catchDeepLink(deepLink) ?? false
     }
     
     public static func handleNotification(userInfo: NotificationParams) {
@@ -93,7 +94,7 @@ public class Router {
                 break
             }
         }
-        delegate?.catchNotification(notification)
+        self.delegate?.catchNotification(notification)
     }
 }
 
