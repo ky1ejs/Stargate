@@ -45,10 +45,15 @@ public struct Notification: Regexable {
     }
 }
 
-public protocol RouterDelegate: class {
+public protocol DeepLinkCatcher: class {
     func catchDeepLink(deepLink: DeepLink) -> Bool
+}
+
+public protocol NotificationCatcher: class {
     func catchNotification(notification: Notification)
 }
+
+public protocol RouterDelegate: DeepLinkCatcher, NotificationCatcher {}
 
 private var routes = [RouteRegex : Route]()
 private var notificationKey = "notification_id"
@@ -69,13 +74,10 @@ public class Router {
     public static func handleDeepLink(params: DeepLinkParams) -> Bool {
         let deepLink = DeepLink(params: params)
         for route in routes.values {
-            switch route.callback {
-            case let .DeepLink(callback):
-                if deepLink.matchesRegex(route.regex) && callback(params) {
-                    return true
-                }
-            default:
-                break
+            if case  .DeepLink(let callback) = route.callback where deepLink.matchesRegex(route.regex) && callback(params) {
+                return true
+            } else if case .DeepLinkCatcher(let weakCatcher) = route.callback where deepLink.matchesRegex(route.regex) && weakCatcher.catcher?.catchDeepLink(deepLink) == true {
+                return true
             }
         }
         return self.delegate?.catchDeepLink(deepLink) ?? false
@@ -84,14 +86,14 @@ public class Router {
     public static func handleNotification(userInfo: NotificationParams) {
         let notification = Notification(params: userInfo)
         for route in routes.values {
-            switch route.callback {
-            case let .Notification(callback):
-                if notification.matchesRegex(route.regex) {
+            if notification.matchesRegex(route.regex) {
+                if case .Notification(let callback) = route.callback where notification.matchesRegex(route.regex) {
                     callback(userInfo)
                     return
+                } else if case .NotificationCatcher(let weakCatcher) = route.callback, let catcher = weakCatcher.catcher {
+                    catcher.catchNotification(notification)
+                    return
                 }
-            default:
-                break
             }
         }
         self.delegate?.catchNotification(notification)
@@ -101,14 +103,24 @@ public class Router {
 
 public typealias RouteRegex = String
 
+public struct WeakDeepLinkCatcher {
+    weak var catcher: DeepLinkCatcher?
+}
+
+public struct WeakNotificationCatcher {
+    weak var catcher: NotificationCatcher?
+}
+
 public enum RouteCallback {
+    case DeepLinkCatcher(WeakDeepLinkCatcher)
     case DeepLink(DeepLinkCallback)
+    case NotificationCatcher(WeakNotificationCatcher)
     case Notification(NotificationCallback)
 }
 
 public struct Route {
-    let regex : RouteRegex
-    let callback : RouteCallback
+    let regex: RouteRegex
+    let callback: RouteCallback
     
     // Annoyingly, this init has to be here to explicitly make it public
     public init(regex: RouteRegex, callback: RouteCallback) {
