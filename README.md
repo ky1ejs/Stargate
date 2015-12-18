@@ -33,18 +33,36 @@ func application(application: UIApplication, didReceiveRemoteNotification userIn
 ### Registering for DeepLink:
 
 ``` swift
-// Matches myapp://cool/ass/stuff
-Router.setRoute(Route(regex: "cool/ass/stuff", callback: .DeepLink(self.routerCallback)))
+class MyViewController: UIViewController, DeepLinkCatcher {
+	static let deepLinkRegex = "cool/ass/stuff" // Matches myapp://cool/ass/stuff
 
-func routerCallback(params: DeepLinkParams) -> Bool {
-  if self.view.window != nil {
-    // View is on screen
-    // Do some rad crap
-    return true
-  } else {
-    // Returning false will make DeepLinkRouter call delegate (if there is one, of course)
-    return false
-  }
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		Router.setRoute(Route(regex: self.dynamicType.deepLinkRegex, callback: .DeepLinkCatcher(WeakDeepLinkCatcher(catcher: self))))
+	}
+
+	func catchDeepLink(deepLink: DeepLink) -> Bool {
+		if self.view.window != nil {
+    		// View is on screen
+    		// Do some rad crap
+    		return true
+  		} else {
+    		// Returning false will make DeepLinkRouter call delegate (if there is one, of course)
+    		return false
+  		}
+    }
+
+    deinit {
+        Router.unsetRoute(self.dynamicType.deepLinkRegex)
+    }
+}
+```
+
+`DeepLink`:
+```swift
+public struct DeepLink: Regexable {
+    public let params: DeepLinkParams
+    public func matchesRegex(regex: RouteRegex) -> Bool
 }
 ```
 
@@ -59,7 +77,22 @@ typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: 
 Pretty much the same as DeepLink.
 
 ```swift
-Router.setRoute(Route(regex: "^cool_ass_stuff$", callback: .Notification(self.routerCallback)))
+class MyViewController: UIViewController, NotificationCatcher {
+	static let notificationRegex = "^cool_ass_stuff$" // Matches myapp://cool/ass/stuff
+
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		Router.setRoute(Route(regex: self.dynamicType.notificationRegex, callback: .NotificationCatcher(WeakNotificationCatcher(catcher: self))))
+	}
+
+	func catchNotification(notification: Notification) {
+		// Do stuff
+    }
+
+    deinit {
+    	Router.unsetRoute(self.dynamicType.notificationRegex)
+    }
+}
 ```
 
 This would be called for this notification:
@@ -89,10 +122,28 @@ Params passed to `routerCallback`:
 public typealias NotificationParams = [NSObject : AnyObject]
 ```
 
-<br>
-### Warning!
 
-Remember to remove your callback when your object get's `deinit`ed:
+#### Closure handlers
+
+You can also just provide a closure if you'd prefer, just make sure you manage memory properly (e.g. use `[weak self]`).
+
+```swift
+Router.setRoute(Route(regex: "^cool_ass_stuff$", callback: .NotificationClosure({ [weak self] params in
+	// Do stuff
+})))
+```
+
+<br>
+### :warning: Memory management...
+
+...is very tricky in this project. Storing the Routes, then recognising that the object (if there is one) for the Route has been deallocated and subsequently removing it from the array of Routes is tough. The hard part is finding the callback to remove from the array of callbacks once it's been deallocated. I haven't given it enough thought yet. Help here would be great.
+
+You need to do either of two things:
+
+- If using a closure Route, use `[weak self]`
+- Use either `WeakDeepLinkCatcher` or `WeakNotificationCatcher`
+
+It's also a good idea to remove your callback when your object gets `deinit`ed:
 
 ```swift
 let notificationRouteRegex = "^cool_ass_stuff$"
@@ -105,9 +156,9 @@ deinit {
 <br>
 ## The delegate
 
-If your ViewController or object that you'd like to handle the `Route` does not exist at the time of the deep link being opened, you can have a delegate that will definately be around (AppDelegate for example) catch the `Route` and do any setup, like, for example, instantiate a ViewController and re-setup its views then call it's `RouteCallback`.
+If your ViewController or object that you'd like to handle the `Route` does not exist at the time of the deep link being opened, you can have a delegate that will definitely be around (AppDelegate for example) catch the `Route` and do any setup, like, for example, instantiate a ViewController and re-setup its views then call it's `RouteCallback`.
 
-You can also use the delegate to setup view heriarchy when a ViewController exists but its view is not on the screen. To do this just return `false` in the `RouterCallback`, like in the example above, which will cause the `DeepLinkRouter` to call the delegate. The delegate gets passed a `DeepLink` or `Notification` struct, therefore it knows which ViewController to get on screen.
+You can also use the delegate to setup view hierarchy when a ViewController exists but its view is not on the screen. To do this just return `false` in the `RouterCallback`, like in the example above, which will cause the `DeepLinkRouter` to call the delegate. The delegate gets passed a `DeepLink` or `Notification` struct, therefore it knows which ViewController to get on screen.
 
 Example:
 
