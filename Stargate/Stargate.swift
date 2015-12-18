@@ -74,7 +74,7 @@ public class Router {
     public static func handleDeepLink(params: DeepLinkParams) -> Bool {
         let deepLink = DeepLink(params: params)
         for route in routes.values {
-            if case  .DeepLink(let callback) = route.callback where deepLink.matchesRegex(route.regex) && callback(params) {
+            if case  .DeepLinkClosure(let callback) = route.callback where deepLink.matchesRegex(route.regex) && callback(params) {
                 return true
             } else if case .DeepLinkCatcher(let weakCatcher) = route.callback where deepLink.matchesRegex(route.regex) && weakCatcher.catcher?.catchDeepLink(deepLink) == true {
                 return true
@@ -87,7 +87,7 @@ public class Router {
         let notification = Notification(params: userInfo)
         for route in routes.values {
             if notification.matchesRegex(route.regex) {
-                if case .Notification(let callback) = route.callback where notification.matchesRegex(route.regex) {
+                if case .NotificationClosure(let callback) = route.callback where notification.matchesRegex(route.regex) {
                     callback(userInfo)
                     return
                 } else if case .NotificationCatcher(let weakCatcher) = route.callback, let catcher = weakCatcher.catcher {
@@ -105,17 +105,19 @@ public typealias RouteRegex = String
 
 public struct WeakDeepLinkCatcher {
     weak var catcher: DeepLinkCatcher?
+    public init(catcher: DeepLinkCatcher) { self.catcher = catcher }
 }
 
 public struct WeakNotificationCatcher {
     weak var catcher: NotificationCatcher?
+    public init(catcher: NotificationCatcher) { self.catcher = catcher }
 }
 
 public enum RouteCallback {
     case DeepLinkCatcher(WeakDeepLinkCatcher)
-    case DeepLink(DeepLinkCallback)
+    case DeepLinkClosure(DeepLinkCallback)
     case NotificationCatcher(WeakNotificationCatcher)
-    case Notification(NotificationCallback)
+    case NotificationClosure(NotificationCallback)
 }
 
 public struct Route {
