@@ -8,42 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		AFC0CEF51B43EE8F006BE28E /* Stargate.h in Headers */ = {isa = PBXBuildFile; fileRef = AFC0CEF41B43EE8F006BE28E /* Stargate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFC0CEFB1B43EE8F006BE28E /* Stargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */; };
-		AFC0CF021B43EE8F006BE28E /* StargateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC0CF011B43EE8F006BE28E /* StargateTests.swift */; };
 		AFC0CF0C1B43EEFF006BE28E /* Stargate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC0CF0B1B43EEFF006BE28E /* Stargate.swift */; };
 		AFC696661BA8819700D4BAB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC696651BA8819700D4BAB5 /* AppDelegate.swift */; };
 		AFC696681BA8819700D4BAB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC696671BA8819700D4BAB5 /* ViewController.swift */; };
 		AFC6966B1BA8819700D4BAB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC696691BA8819700D4BAB5 /* Main.storyboard */; };
 		AFC6966D1BA8819700D4BAB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC6966C1BA8819700D4BAB5 /* Images.xcassets */; };
 		AFC696701BA8819700D4BAB5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC6966E1BA8819700D4BAB5 /* LaunchScreen.xib */; };
-		AFC6967C1BA8819800D4BAB5 /* LinksAndStuffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC6967B1BA8819800D4BAB5 /* LinksAndStuffTests.swift */; };
 		AFC696881BA8820B00D4BAB5 /* Stargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		AFC0CEFC1B43EE8F006BE28E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFC0CEE61B43EE8F006BE28E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFC0CEEE1B43EE8F006BE28E;
-			remoteInfo = Stargate;
-		};
-		AFC696761BA8819700D4BAB5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFC0CEE61B43EE8F006BE28E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFC696601BA8819700D4BAB5;
-			remoteInfo = LinksAndStuff;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC0CEF31B43EE8F006BE28E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC0CEF41B43EE8F006BE28E /* Stargate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stargate.h; sourceTree = "<group>"; };
-		AFC0CEFA1B43EE8F006BE28E /* StargateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StargateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFC0CF001B43EE8F006BE28E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFC0CF011B43EE8F006BE28E /* StargateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StargateTests.swift; sourceTree = "<group>"; };
 		AFC0CF0B1B43EEFF006BE28E /* Stargate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stargate.swift; sourceTree = "<group>"; };
 		AFC696611BA8819700D4BAB5 /* LinksAndStuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinksAndStuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC696641BA8819700D4BAB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,9 +29,6 @@
 		AFC6966A1BA8819700D4BAB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFC6966C1BA8819700D4BAB5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFC6966F1BA8819700D4BAB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		AFC696751BA8819700D4BAB5 /* LinksAndStuffTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinksAndStuffTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFC6967A1BA8819800D4BAB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFC6967B1BA8819800D4BAB5 /* LinksAndStuffTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksAndStuffTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,14 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC0CEF71B43EE8F006BE28E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFC0CEFB1B43EE8F006BE28E /* Stargate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,13 +47,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFC696721BA8819700D4BAB5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,9 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC0CEF11B43EE8F006BE28E /* Stargate */,
-				AFC0CEFE1B43EE8F006BE28E /* StargateTests */,
 				AFC696621BA8819700D4BAB5 /* LinksAndStuff */,
-				AFC696781BA8819800D4BAB5 /* LinksAndStuffTests */,
 				AFC0CEF01B43EE8F006BE28E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,9 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */,
-				AFC0CEFA1B43EE8F006BE28E /* StargateTests.xctest */,
 				AFC696611BA8819700D4BAB5 /* LinksAndStuff.app */,
-				AFC696751BA8819700D4BAB5 /* LinksAndStuffTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,23 +86,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AFC0CEFE1B43EE8F006BE28E /* StargateTests */ = {
-			isa = PBXGroup;
-			children = (
-				AFC0CF011B43EE8F006BE28E /* StargateTests.swift */,
-				AFC0CEFF1B43EE8F006BE28E /* Supporting Files */,
-			);
-			path = StargateTests;
-			sourceTree = "<group>";
-		};
-		AFC0CEFF1B43EE8F006BE28E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AFC0CF001B43EE8F006BE28E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		AFC696621BA8819700D4BAB5 /* LinksAndStuff */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,23 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				AFC696641BA8819700D4BAB5 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AFC696781BA8819800D4BAB5 /* LinksAndStuffTests */ = {
-			isa = PBXGroup;
-			children = (
-				AFC6967B1BA8819800D4BAB5 /* LinksAndStuffTests.swift */,
-				AFC696791BA8819800D4BAB5 /* Supporting Files */,
-			);
-			path = LinksAndStuffTests;
-			sourceTree = "<group>";
-		};
-		AFC696791BA8819800D4BAB5 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AFC6967A1BA8819800D4BAB5 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -218,24 +139,6 @@
 			productReference = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AFC0CEF91B43EE8F006BE28E /* StargateTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFC0CF081B43EE8F006BE28E /* Build configuration list for PBXNativeTarget "StargateTests" */;
-			buildPhases = (
-				AFC0CEF61B43EE8F006BE28E /* Sources */,
-				AFC0CEF71B43EE8F006BE28E /* Frameworks */,
-				AFC0CEF81B43EE8F006BE28E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AFC0CEFD1B43EE8F006BE28E /* PBXTargetDependency */,
-			);
-			name = StargateTests;
-			productName = StargateTests;
-			productReference = AFC0CEFA1B43EE8F006BE28E /* StargateTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		AFC696601BA8819700D4BAB5 /* LinksAndStuff */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFC6967D1BA8819800D4BAB5 /* Build configuration list for PBXNativeTarget "LinksAndStuff" */;
@@ -253,24 +156,6 @@
 			productReference = AFC696611BA8819700D4BAB5 /* LinksAndStuff.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AFC696741BA8819700D4BAB5 /* LinksAndStuffTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFC696801BA8819800D4BAB5 /* Build configuration list for PBXNativeTarget "LinksAndStuffTests" */;
-			buildPhases = (
-				AFC696711BA8819700D4BAB5 /* Sources */,
-				AFC696721BA8819700D4BAB5 /* Frameworks */,
-				AFC696731BA8819700D4BAB5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AFC696771BA8819700D4BAB5 /* PBXTargetDependency */,
-			);
-			name = LinksAndStuffTests;
-			productName = LinksAndStuffTests;
-			productReference = AFC696751BA8819700D4BAB5 /* LinksAndStuffTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -284,15 +169,8 @@
 					AFC0CEEE1B43EE8F006BE28E = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
-					AFC0CEF91B43EE8F006BE28E = {
-						CreatedOnToolsVersion = 6.3.2;
-					};
 					AFC696601BA8819700D4BAB5 = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					AFC696741BA8819700D4BAB5 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = AFC696601BA8819700D4BAB5;
 					};
 				};
 			};
@@ -310,22 +188,13 @@
 			projectRoot = "";
 			targets = (
 				AFC0CEEE1B43EE8F006BE28E /* Stargate */,
-				AFC0CEF91B43EE8F006BE28E /* StargateTests */,
 				AFC696601BA8819700D4BAB5 /* LinksAndStuff */,
-				AFC696741BA8819700D4BAB5 /* LinksAndStuffTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AFC0CEED1B43EE8F006BE28E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC0CEF81B43EE8F006BE28E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -342,13 +211,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFC696731BA8819700D4BAB5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -357,14 +219,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFC0CF0C1B43EEFF006BE28E /* Stargate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFC0CEF61B43EE8F006BE28E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFC0CF021B43EE8F006BE28E /* StargateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,28 +231,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFC696711BA8819700D4BAB5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFC6967C1BA8819800D4BAB5 /* LinksAndStuffTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AFC0CEFD1B43EE8F006BE28E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFC0CEEE1B43EE8F006BE28E /* Stargate */;
-			targetProxy = AFC0CEFC1B43EE8F006BE28E /* PBXContainerItemProxy */;
-		};
-		AFC696771BA8819700D4BAB5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFC696601BA8819700D4BAB5 /* LinksAndStuff */;
-			targetProxy = AFC696761BA8819700D4BAB5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AFC696691BA8819700D4BAB5 /* Main.storyboard */ = {
@@ -547,38 +380,6 @@
 			};
 			name = Release;
 		};
-		AFC0CF091B43EE8F006BE28E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = StargateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		AFC0CF0A1B43EE8F006BE28E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = StargateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 		AFC6967E1BA8819800D4BAB5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -608,44 +409,6 @@
 			};
 			name = Release;
 		};
-		AFC696811BA8819800D4BAB5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LinksAndStuffTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinksAndStuff.app/LinksAndStuff";
-			};
-			name = Debug;
-		};
-		AFC696821BA8819800D4BAB5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LinksAndStuffTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinksAndStuff.app/LinksAndStuff";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -667,29 +430,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AFC0CF081B43EE8F006BE28E /* Build configuration list for PBXNativeTarget "StargateTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFC0CF091B43EE8F006BE28E /* Debug */,
-				AFC0CF0A1B43EE8F006BE28E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AFC6967D1BA8819800D4BAB5 /* Build configuration list for PBXNativeTarget "LinksAndStuff" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AFC6967E1BA8819800D4BAB5 /* Debug */,
 				AFC6967F1BA8819800D4BAB5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AFC696801BA8819800D4BAB5 /* Build configuration list for PBXNativeTarget "LinksAndStuffTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFC696811BA8819800D4BAB5 /* Debug */,
-				AFC696821BA8819800D4BAB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
