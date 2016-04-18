@@ -7,25 +7,27 @@
 
 import UIKit
 
-public typealias DeepLinkParams = (url: NSURL, sourceApplication: String?, annotation: AnyObject)
+public struct DeepLinkParams {
+    let url: NSURL
+    let sourceApplication: String?
+    let annotation: AnyObject
+}
 public typealias DeepLinkCallback = DeepLinkParams -> Bool
 public typealias NotificationParams = [NSObject : AnyObject]
 public typealias NotificationCallback = (NotificationParams) -> ()
 
 public protocol Regexable {
-    func matchesRegex(regex: RouteRegex) -> Bool
+    func matchesRegex(regex: Regex) -> Bool
 }
 
 public struct DeepLink: Regexable {
     public let params: DeepLinkParams
     
-    public func matchesRegex(regex: RouteRegex) -> Bool {
-        if let host = self.params.url.host, path = self.params.url.path {
-            let link = "\(host)\(path)"
-            let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
-            if regex?.numberOfMatchesInString(link, options: [], range: NSMakeRange(0, link.characters.count)) > 0 {
-                return true
-            }
+    public func matchesRegex(regex: Regex) -> Bool {
+        let link = self.params.url.absoluteString
+        let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
+        if regex?.numberOfMatchesInString(link, options: [], range: NSMakeRange(0, link.characters.count)) > 0 {
+            return true
         }
         return false
     }
@@ -34,7 +36,7 @@ public struct DeepLink: Regexable {
 public struct Notification: Regexable {
     public let params: NotificationParams
     
-    public func matchesRegex(regex: RouteRegex) -> Bool {
+    public func matchesRegex(regex: Regex) -> Bool {
         if let payload = self.params["aps"] as? [NSObject : AnyObject], notification = payload[notificationKey] as? String {
             let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
             if regex?.numberOfMatchesInString(notification, options: [], range: NSMakeRange(0, notification.characters.count)) > 0 {
@@ -55,7 +57,7 @@ public protocol NotificationCatcher: class {
 
 public protocol RouterDelegate: DeepLinkCatcher, NotificationCatcher {}
 
-private var routes = [RouteRegex : Route]()
+private var routes = [Regex : Route]()
 private var notificationKey = "notification_id"
 
 public class Router {
@@ -63,18 +65,20 @@ public class Router {
     
     public static func setRoute(route: Route) { routes[route.regex] = route }
     
-    public static func unsetRoute(route: Route) { unsetRoute(route.regex) }
+    public static func unsetRoute(route: Route) { unsetRouteForRegex(route.regex) }
     
-    public static func unsetRoute(routeRegex: RouteRegex) { routes[routeRegex] = nil }
+    public static func unsetRouteForRegex(regex: Regex) { routes[regex] = nil }
     
-    public static func callbackForRoute(regex: RouteRegex) -> Route? { return routes[regex] }
+    public static func routeForRegex(regex: Regex) -> Route? { return routes[regex] }
     
     public static func setNotificationKey(key: String) { notificationKey = key }
+    
+    public static func allRoutes() -> [Route] { return Array(routes.values) }
     
     public static func handleDeepLink(params: DeepLinkParams) -> Bool {
         let deepLink = DeepLink(params: params)
         for route in routes.values {
-            if case  .DeepLinkClosure(let callback) = route.callback where deepLink.matchesRegex(route.regex) && callback(params) {
+            if case .DeepLinkClosure(let callback) = route.callback where deepLink.matchesRegex(route.regex) && callback(params) {
                 return true
             } else if case .DeepLinkCatcher(let weakCatcher) = route.callback where deepLink.matchesRegex(route.regex) && weakCatcher.catcher?.catchDeepLink(deepLink) == true {
                 return true
@@ -101,7 +105,7 @@ public class Router {
 }
 
 
-public typealias RouteRegex = String
+public typealias Regex = String
 
 public struct WeakDeepLinkCatcher {
     weak var catcher: DeepLinkCatcher?
@@ -121,11 +125,11 @@ public enum RouteCallback {
 }
 
 public struct Route {
-    let regex: RouteRegex
+    let regex: Regex
     let callback: RouteCallback
     
     // Annoyingly, this init has to be here to explicitly make it public
-    public init(regex: RouteRegex, callback: RouteCallback) {
+    public init(regex: Regex, callback: RouteCallback) {
         self.regex = regex
         self.callback = callback
     }
