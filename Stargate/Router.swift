@@ -44,8 +44,7 @@ public class Router {
     public static func routeForRegex(regex: Regex) -> Route? { return routes[regex] }
     public static func allRoutes() -> [Route] { return Array(routes.values) }
     
-    public static func handleDeepLink(params: DeepLinkParams) -> Bool {
-        let deepLink = DeepLink(params: params)
+    public static func handleDeepLink(deepLink: DeepLink) -> Bool {
         for route in routes.values {
             if case .DeepLink(let catcher) = route.callback where
                 deepLink.matchesRoute(route) && catcher.catchDeepLink(deepLink) {
