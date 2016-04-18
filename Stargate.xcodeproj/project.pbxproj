@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AFC0CEF51B43EE8F006BE28E /* Stargate.h in Headers */ = {isa = PBXBuildFile; fileRef = AFC0CEF41B43EE8F006BE28E /* Stargate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFC0CF0C1B43EEFF006BE28E /* Stargate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC0CF0B1B43EEFF006BE28E /* Stargate.swift */; };
 		AFC696661BA8819700D4BAB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC696651BA8819700D4BAB5 /* AppDelegate.swift */; };
 		AFC696681BA8819700D4BAB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC696671BA8819700D4BAB5 /* ViewController.swift */; };
 		AFC6966B1BA8819700D4BAB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFC696691BA8819700D4BAB5 /* Main.storyboard */; };
@@ -17,6 +16,9 @@
 		AFC696881BA8820B00D4BAB5 /* Stargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */; };
 		AFCC70911CC4D55F00313B71 /* StargateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC70901CC4D55F00313B71 /* StargateTests.swift */; };
 		AFCC70931CC4D55F00313B71 /* Stargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */; };
+		AFCC709A1CC4EA1A00313B71 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC70991CC4EA1900313B71 /* DeepLink.swift */; };
+		AFCC709C1CC4EA2700313B71 /* PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC709B1CC4EA2700313B71 /* PushNotification.swift */; };
+		AFCC709E1CC4EE8000313B71 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC709D1CC4EE8000313B71 /* Router.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +35,6 @@
 		AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC0CEF31B43EE8F006BE28E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC0CEF41B43EE8F006BE28E /* Stargate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stargate.h; sourceTree = "<group>"; };
-		AFC0CF0B1B43EEFF006BE28E /* Stargate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stargate.swift; sourceTree = "<group>"; };
 		AFC696611BA8819700D4BAB5 /* LinksAndStuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinksAndStuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC696641BA8819700D4BAB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC696651BA8819700D4BAB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +45,9 @@
 		AFCC708E1CC4D55F00313B71 /* StargateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StargateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCC70901CC4D55F00313B71 /* StargateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StargateTests.swift; sourceTree = "<group>"; };
 		AFCC70921CC4D55F00313B71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AFCC70991CC4EA1900313B71 /* DeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		AFCC709B1CC4EA2700313B71 /* PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotification.swift; sourceTree = "<group>"; };
+		AFCC709D1CC4EE8000313B71 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +101,9 @@
 			isa = PBXGroup;
 			children = (
 				AFC0CEF41B43EE8F006BE28E /* Stargate.h */,
-				AFC0CF0B1B43EEFF006BE28E /* Stargate.swift */,
+				AFCC709D1CC4EE8000313B71 /* Router.swift */,
+				AFCC70991CC4EA1900313B71 /* DeepLink.swift */,
+				AFCC709B1CC4EA2700313B71 /* PushNotification.swift */,
 				AFC0CEF21B43EE8F006BE28E /* Supporting Files */,
 			);
 			path = Stargate;
@@ -282,7 +288,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFC0CF0C1B43EEFF006BE28E /* Stargate.swift in Sources */,
+				AFCC709E1CC4EE8000313B71 /* Router.swift in Sources */,
+				AFCC709C1CC4EA2700313B71 /* PushNotification.swift in Sources */,
+				AFCC709A1CC4EA1A00313B71 /* DeepLink.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
