@@ -9,14 +9,13 @@
 import Foundation
 
 public typealias PushNotificationPayload = [NSObject : AnyObject]
-public typealias PushNotificationCallback = (PushNotificationPayload) -> ()
 
 private var defaultPushNotificationKey = "notification_id"
 
 @objc public class PushNotification: NSObject, Regexable {
     public let payload: PushNotificationPayload
     
-    init(payload: PushNotificationPayload) {
+    public init(payload: PushNotificationPayload) {
         self.payload = payload
     }
     
@@ -34,4 +33,11 @@ private var defaultPushNotificationKey = "notification_id"
 
 @objc public protocol PushNotificationCatcher: class {
     func catchPushNotification(notification: PushNotification)
+}
+
+public typealias PushNotificationClosure = (notification: PushNotification) -> ()
+public class PushNotificationClosureCatcher: PushNotificationCatcher {
+    public let callback: PushNotificationClosure
+    public init(callback: PushNotificationClosure) { self.callback = callback }
+    @objc public func catchPushNotification(notification: PushNotification) { self.callback(notification: notification) }
 }

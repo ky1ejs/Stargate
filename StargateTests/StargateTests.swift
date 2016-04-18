@@ -12,8 +12,8 @@ import XCTest
 class StargateTests: XCTestCase {
     func testHTTPURLRouteDeepLink() {
         let regex = "^https:\\/\\/loot.io\\/verify-waiting-list-email"
-        let deepLinkClosure = DeepLinkClosureCallable(callback: { (params) -> Bool in return true })
-        Router.setDeepLinkCatcher(deepLinkClosure , forRegex: regex)
+        let deepLinkClosure = DeepLinkClosureCatcher(callback: { (params) -> Bool in return true })
+        Router.setDeepLinkCatcher(deepLinkClosure, forRegex: regex)
         let url = NSURL(string: "https://loot.io/verify-waiting-list-email")!
         let called = Router.handleDeepLink(DeepLink(url: url, sourceApplication: nil, annotation: NSObject()))
         XCTAssertTrue(called)
@@ -21,8 +21,8 @@ class StargateTests: XCTestCase {
     
     func testCustomSchemeDeepLink() {
         let regex = "^loot://confirm-password-reset-email\\/.*$"
-        let deepLinkClosure = DeepLinkClosureCallable(callback: { (params) -> Bool in return true })
-        Router.setDeepLinkCatcher(deepLinkClosure , forRegex: regex)
+        let deepLinkClosure = DeepLinkClosureCatcher(callback: { (params) -> Bool in return true })
+        Router.setDeepLinkCatcher(deepLinkClosure, forRegex: regex)
         let url = NSURL(string: "loot://confirm-password-reset-email/?token=onjk321dash09832gadjdhdh203223ih2io22k")!
         let called = Router.handleDeepLink(DeepLink(url: url, sourceApplication: nil, annotation: NSObject()))
         XCTAssertTrue(called)

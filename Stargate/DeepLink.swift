@@ -13,7 +13,7 @@ import Foundation
     let sourceApplication: String?
     let annotation: AnyObject
     
-    init(url: NSURL, sourceApplication: String?, annotation: AnyObject) {
+    public init(url: NSURL, sourceApplication: String?, annotation: AnyObject) {
         self.url = url
         self.sourceApplication = sourceApplication
         self.annotation = annotation
@@ -31,14 +31,9 @@ import Foundation
     func catchDeepLink(deepLink: DeepLink) -> Bool
 }
 
-public typealias DeepLinkClosure = DeepLink -> Bool
-public class DeepLinkClosureCallable: DeepLinkCatcher {
+public typealias DeepLinkClosure = (deepLink: DeepLink) -> Bool
+public class DeepLinkClosureCatcher: DeepLinkCatcher {
     public let callback: DeepLinkClosure
     public init(callback: DeepLinkClosure) { self.callback = callback }
-    @objc public func catchDeepLink(deepLink: DeepLink) -> Bool { return self.callback(deepLink) }
-}
-
-public class DeepLinkCatcherCallable: DeepLinkCatcher {
-    private(set) weak var catcher: DeepLinkCatcher?
-    @objc public func catchDeepLink(deepLink: DeepLink) -> Bool { return self.catcher?.catchDeepLink(deepLink) ?? false }
+    @objc public func catchDeepLink(deepLink: DeepLink) -> Bool { return self.callback(deepLink: deepLink) }
 }
