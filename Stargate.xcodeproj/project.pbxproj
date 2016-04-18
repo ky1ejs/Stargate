@@ -15,7 +15,19 @@
 		AFC6966D1BA8819700D4BAB5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFC6966C1BA8819700D4BAB5 /* Images.xcassets */; };
 		AFC696701BA8819700D4BAB5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFC6966E1BA8819700D4BAB5 /* LaunchScreen.xib */; };
 		AFC696881BA8820B00D4BAB5 /* Stargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */; };
+		AFCC70911CC4D55F00313B71 /* StargateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCC70901CC4D55F00313B71 /* StargateTests.swift */; };
+		AFCC70931CC4D55F00313B71 /* Stargate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AFCC70941CC4D55F00313B71 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFC0CEE61B43EE8F006BE28E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFC0CEEE1B43EE8F006BE28E;
+			remoteInfo = Stargate;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +41,9 @@
 		AFC6966A1BA8819700D4BAB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AFC6966C1BA8819700D4BAB5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFC6966F1BA8819700D4BAB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		AFCC708E1CC4D55F00313B71 /* StargateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StargateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFCC70901CC4D55F00313B71 /* StargateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StargateTests.swift; sourceTree = "<group>"; };
+		AFCC70921CC4D55F00313B71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +62,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AFCC708B1CC4D55F00313B71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFCC70931CC4D55F00313B71 /* Stargate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +78,7 @@
 			children = (
 				AFC0CEF11B43EE8F006BE28E /* Stargate */,
 				AFC696621BA8819700D4BAB5 /* LinksAndStuff */,
+				AFCC708F1CC4D55F00313B71 /* StargateTests */,
 				AFC0CEF01B43EE8F006BE28E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +88,7 @@
 			children = (
 				AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */,
 				AFC696611BA8819700D4BAB5 /* LinksAndStuff.app */,
+				AFCC708E1CC4D55F00313B71 /* StargateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -105,6 +130,15 @@
 				AFC696641BA8819700D4BAB5 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AFCC708F1CC4D55F00313B71 /* StargateTests */ = {
+			isa = PBXGroup;
+			children = (
+				AFCC70901CC4D55F00313B71 /* StargateTests.swift */,
+				AFCC70921CC4D55F00313B71 /* Info.plist */,
+			);
+			path = StargateTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +190,24 @@
 			productReference = AFC696611BA8819700D4BAB5 /* LinksAndStuff.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AFCC708D1CC4D55F00313B71 /* StargateTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFCC70981CC4D55F00313B71 /* Build configuration list for PBXNativeTarget "StargateTests" */;
+			buildPhases = (
+				AFCC708A1CC4D55F00313B71 /* Sources */,
+				AFCC708B1CC4D55F00313B71 /* Frameworks */,
+				AFCC708C1CC4D55F00313B71 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFCC70951CC4D55F00313B71 /* PBXTargetDependency */,
+			);
+			name = StargateTests;
+			productName = StargateTests;
+			productReference = AFCC708E1CC4D55F00313B71 /* StargateTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -163,7 +215,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0700;
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					AFC0CEEE1B43EE8F006BE28E = {
@@ -171,6 +223,10 @@
 					};
 					AFC696601BA8819700D4BAB5 = {
 						CreatedOnToolsVersion = 6.4;
+					};
+					AFCC708D1CC4D55F00313B71 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = X2TBSUCASC;
 					};
 				};
 			};
@@ -189,6 +245,7 @@
 			targets = (
 				AFC0CEEE1B43EE8F006BE28E /* Stargate */,
 				AFC696601BA8819700D4BAB5 /* LinksAndStuff */,
+				AFCC708D1CC4D55F00313B71 /* StargateTests */,
 			);
 		};
 /* End PBXProject section */
@@ -208,6 +265,13 @@
 				AFC6966B1BA8819700D4BAB5 /* Main.storyboard in Resources */,
 				AFC696701BA8819700D4BAB5 /* LaunchScreen.xib in Resources */,
 				AFC6966D1BA8819700D4BAB5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFCC708C1CC4D55F00313B71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +295,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AFCC708A1CC4D55F00313B71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFCC70911CC4D55F00313B71 /* StargateTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFCC70951CC4D55F00313B71 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFC0CEEE1B43EE8F006BE28E /* Stargate */;
+			targetProxy = AFCC70941CC4D55F00313B71 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AFC696691BA8819700D4BAB5 /* Main.storyboard */ = {
@@ -409,6 +489,32 @@
 			};
 			name = Release;
 		};
+		AFCC70961CC4D55F00313B71 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = StargateTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kylejm.StargateTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		AFCC70971CC4D55F00313B71 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = StargateTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.kylejm.StargateTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -438,6 +544,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		AFCC70981CC4D55F00313B71 /* Build configuration list for PBXNativeTarget "StargateTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFCC70961CC4D55F00313B71 /* Debug */,
+				AFCC70971CC4D55F00313B71 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
