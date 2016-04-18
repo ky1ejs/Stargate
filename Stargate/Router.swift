@@ -9,58 +9,49 @@
 import Foundation
 
 
-
-public protocol RouterDelegate: DeepLinkCatcher, NotificationCatcher {}
-
-public enum RouteCallback {
-    case DeepLink(DeepLinkCatcher)
-    case PushNotification(catcher: NotificationCatcher, pushNotificationKey: String?)
-}
+public protocol RouterDelegate: DeepLinkCatcher, PushNotificationCatcher {}
 
 public typealias Regex = String
 
-public struct Route {
-    let regex: Regex
-    let callback: RouteCallback
-    
-    // Annoyingly, this init has to be here to explicitly make it public
-    public init(regex: Regex, callback: RouteCallback) {
-        self.regex = regex
-        self.callback = callback
-    }
+public protocol Regexable {
+    func matchesRegex(regex: Regex) -> Bool
 }
 
-public protocol Routeable {
-    func matchesRoute(route: Route) -> Bool
-}
+private var deepLinkRoutes = NSMapTable()
+private var pushNotificationRoutes = NSMapTable()
 
-private var routes = [Regex : Route]()
+public struct Router {}
 
-public class Router {
+public extension Router {
     public static weak var delegate: RouterDelegate?
-    public static func setRoute(route: Route) { routes[route.regex] = route }
-    public static func unsetRoute(route: Route) { unsetRouteForRegex(route.regex) }
-    public static func unsetRouteForRegex(regex: Regex) { routes[regex] = nil }
-    public static func routeForRegex(regex: Regex) -> Route? { return routes[regex] }
-    public static func allRoutes() -> [Route] { return Array(routes.values) }
+    public static func setDeepLinkCatcher(catcher: DeepLinkCatcher, forRegex regex: Regex) { deepLinkRoutes.setObject(catcher, forKey: regex) }
+    public static func deepLinkCatcherForRegex(regex: Regex) -> DeepLinkCatcher? { return deepLinkRoutes.objectForKey(regex) as? DeepLinkCatcher }
+    public static func unsetDeepLinkCatcherForRegex(regex: Regex) { deepLinkRoutes.removeObjectForKey(regex) }
     
     public static func handleDeepLink(deepLink: DeepLink) -> Bool {
-        for route in routes.values {
-            if case .DeepLink(let catcher) = route.callback where
-                deepLink.matchesRoute(route) && catcher.catchDeepLink(deepLink) {
+        let deepLinkRoutesDict = deepLinkRoutes.dictionaryRepresentation() as! [Regex : DeepLinkCatcher]
+        for (key, value) in deepLinkRoutesDict {
+            if deepLink.matchesRegex(key) && value.catchDeepLink(deepLink) {
                 return true
             }
         }
         return self.delegate?.catchDeepLink(deepLink) ?? false
     }
+}
+
+public extension Router {
+    public static func setPushNotificationCatcher(catcher: PushNotificationCatcher, forRegex regex: Regex) { pushNotificationRoutes.setObject(catcher, forKey: regex) }
+    public static func pushNotificationCatcherForRegex(regex: Regex) -> PushNotificationCatcher? { return pushNotificationRoutes.objectForKey(regex) as? PushNotificationCatcher }
+    public static func unsetPushNotificationCatcherForRegex(regex: Regex) { pushNotificationRoutes.removeObjectForKey(regex) }
     
-    public static func handleNotification(userInfo: PushNotificationParams) {
-        let notification = PushNotification(params: userInfo)
-        for route in routes.values {
-            if case let .PushNotification(catcher, _) = route.callback where notification.matchesRoute(route) {
-                catcher.catchNotification(notification)
+    public static func handleNotification(userInfo: PushNotificationPayload) {
+        let pushNotificationRoutesDict = pushNotificationRoutes.dictionaryRepresentation() as! [Regex : PushNotificationCatcher]
+        let notification = PushNotification(payload: userInfo)
+        for (key, value) in pushNotificationRoutesDict {
+            if notification.matchesRegex(key) {
+                value.catchPushNotification(notification)
             }
         }
-        self.delegate?.catchNotification(notification)
+        self.delegate?.catchPushNotification(notification)
     }
 }

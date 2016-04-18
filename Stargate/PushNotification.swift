@@ -8,28 +8,30 @@
 
 import Foundation
 
-public typealias PushNotificationParams = [NSObject : AnyObject]
-public typealias PushNotificationCallback = (PushNotificationParams) -> ()
-
-public protocol NotificationCatcher: class {
-    func catchNotification(notification: PushNotification)
-}
+public typealias PushNotificationPayload = [NSObject : AnyObject]
+public typealias PushNotificationCallback = (PushNotificationPayload) -> ()
 
 private var defaultPushNotificationKey = "notification_id"
 
-public struct PushNotification: Routeable {
-    public let params: PushNotificationParams
+@objc public class PushNotification: NSObject, Regexable {
+    public let payload: PushNotificationPayload
+    
+    init(payload: PushNotificationPayload) {
+        self.payload = payload
+    }
     
     public static func setDefaultPushNotificationKey(key: String) { defaultPushNotificationKey = key }
     
-    public func matchesRoute(route: Route) -> Bool {
-        if case let .PushNotification(_, pushNotificationKey) = route.callback {
-            if let payload = self.params["aps"] as? [NSObject : AnyObject], notification = payload[pushNotificationKey ?? defaultPushNotificationKey] as? String {
-                let regex = try? NSRegularExpression(pattern: route.regex, options: .CaseInsensitive)
-                let numberOfMatches = regex?.numberOfMatchesInString(notification, options: [], range: NSMakeRange(0, notification.characters.count))
-                return numberOfMatches > 0
-            }
+    public func matchesRegex(regex: Regex) -> Bool {
+        if let payload = self.payload["aps"] as? [NSObject : AnyObject], notification = payload[defaultPushNotificationKey] as? String {
+            let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
+            let numberOfMatches = regex?.numberOfMatchesInString(notification, options: [], range: NSMakeRange(0, notification.characters.count))
+            return numberOfMatches > 0
         }
         return false
     }
+}
+
+@objc public protocol PushNotificationCatcher: class {
+    func catchPushNotification(notification: PushNotification)
 }
