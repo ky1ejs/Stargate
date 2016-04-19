@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF8543011CC6A0030056B856 /* RouterClosureCatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8543001CC6A0030056B856 /* RouterClosureCatcherTests.swift */; };
+		AF8543031CC6AC2F0056B856 /* DictionaryHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8543021CC6AC2F0056B856 /* DictionaryHelper.swift */; };
 		AFC0CEF51B43EE8F006BE28E /* Stargate.h in Headers */ = {isa = PBXBuildFile; fileRef = AFC0CEF41B43EE8F006BE28E /* Stargate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFC696661BA8819700D4BAB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC696651BA8819700D4BAB5 /* AppDelegate.swift */; };
 		AFC696681BA8819700D4BAB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC696671BA8819700D4BAB5 /* ViewController.swift */; };
@@ -32,6 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF8543001CC6A0030056B856 /* RouterClosureCatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouterClosureCatcherTests.swift; sourceTree = "<group>"; };
+		AF8543021CC6AC2F0056B856 /* DictionaryHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryHelper.swift; sourceTree = "<group>"; };
 		AFC0CEEF1B43EE8F006BE28E /* Stargate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stargate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFC0CEF31B43EE8F006BE28E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFC0CEF41B43EE8F006BE28E /* Stargate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stargate.h; sourceTree = "<group>"; };
@@ -104,6 +108,7 @@
 				AFCC709D1CC4EE8000313B71 /* Router.swift */,
 				AFCC70991CC4EA1900313B71 /* DeepLink.swift */,
 				AFCC709B1CC4EA2700313B71 /* PushNotification.swift */,
+				AF8543021CC6AC2F0056B856 /* DictionaryHelper.swift */,
 				AFC0CEF21B43EE8F006BE28E /* Supporting Files */,
 			);
 			path = Stargate;
@@ -142,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				AFCC70901CC4D55F00313B71 /* StargateTests.swift */,
+				AF8543001CC6A0030056B856 /* RouterClosureCatcherTests.swift */,
 				AFCC70921CC4D55F00313B71 /* Info.plist */,
 			);
 			path = StargateTests;
@@ -291,6 +297,7 @@
 				AFCC709E1CC4EE8000313B71 /* Router.swift in Sources */,
 				AFCC709C1CC4EA2700313B71 /* PushNotification.swift in Sources */,
 				AFCC709A1CC4EA1A00313B71 /* DeepLink.swift in Sources */,
+				AF8543031CC6AC2F0056B856 /* DictionaryHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF8543011CC6A0030056B856 /* RouterClosureCatcherTests.swift in Sources */,
 				AFCC70911CC4D55F00313B71 /* StargateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,6 +568,7 @@
 				AFCC70971CC4D55F00313B71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
