@@ -9,9 +9,9 @@
 import Foundation
 
 @objc public class DeepLink: NSObject, Regexable {
-    let url: NSURL
-    let sourceApplication: String?
-    let annotation: AnyObject
+    public let url: NSURL
+    public let sourceApplication: String?
+    public let annotation: AnyObject
     
     public init(url: NSURL, sourceApplication: String?, annotation: AnyObject) {
         self.url = url
