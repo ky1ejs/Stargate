@@ -48,7 +48,7 @@ class MyViewController: UIViewController, DeepLinkCatcher {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        Router.setDeepLinkCatcher(self , forRegex: self.dynamicType.deepLinkRegexreferenceStrength: .Weak)
+        Router.setDeepLinkCatcher(self , forRegex: self.dynamicType.deepLinkRegex, referenceStrength: .Weak)
 	}
 
 	func catchDeepLink(deepLink: DeepLink) -> Bool {
