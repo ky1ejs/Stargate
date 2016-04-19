@@ -43,13 +43,12 @@ class MyViewController: UIViewController, DeepLinkCatcher {
 
 	func catchDeepLink(deepLink: DeepLink) -> Bool {
 		if self.view.window != nil {
-    		// View is on screen
-    		// Do some rad crap
-    		return true
-  		} else {
+	    		// View is on screen
+	    		// Do some rad crap
+	    		return true
+  		}
     		// Returning false will make DeepLinkRouter call delegate (if there is one, of course)
     		return false
-  		}
     }
 
     deinit {
