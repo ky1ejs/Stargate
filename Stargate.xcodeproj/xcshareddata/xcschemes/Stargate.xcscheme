@@ -22,13 +22,13 @@
          </BuildActionEntry>
          <BuildActionEntry
             buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AFC0CEF91B43EE8F006BE28E"
+               BlueprintIdentifier = "AFCC708D1CC4D55F00313B71"
                BuildableName = "StargateTests.xctest"
                BlueprintName = "StargateTests"
                ReferencedContainer = "container:Stargate.xcodeproj">
@@ -46,7 +46,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AFC0CEF91B43EE8F006BE28E"
+               BlueprintIdentifier = "AFCC708D1CC4D55F00313B71"
                BuildableName = "StargateTests.xctest"
                BlueprintName = "StargateTests"
                ReferencedContainer = "container:Stargate.xcodeproj">
