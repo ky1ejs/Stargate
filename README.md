@@ -10,17 +10,17 @@
     <br>
     <br>
 
-    Attempting to make deeplinking and handling push notifications on iOS with Swift simpler. Work in progress.
+    Attempting to make deeplinking and handling push notifications on iOS, simpler. Work in progress.
 
 </p>
 
 
 ## Usage
 
-In your App Delegate:
+### In your App Delegate:
 
 
-DeepLink:
+`DeepLink`:
 
 ```swift
 func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
@@ -29,7 +29,7 @@ func application(application: UIApplication, openURL url: NSURL, sourceApplicati
 }
 ```
 
-PushNotification:
+`PushNotification`:
 
 ```swift
 func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
@@ -48,7 +48,7 @@ class MyViewController: UIViewController, DeepLinkCatcher {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        Router.setDeepLinkCatcher(self , forRegex: self.dynamicType.deepLinkRegex)
+        Router.setDeepLinkCatcher(self , forRegex: self.dynamicType.deepLinkRegexreferenceStrength: .Weak)
 	}
 
 	func catchDeepLink(deepLink: DeepLink) -> Bool {
@@ -97,7 +97,7 @@ class MyViewController: UIViewController, PushNotificationCatcher {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		Router.setPushNotificationCatcher(self, forRegex: self.dynamicType.notificationRegex)
+		Router.setPushNotificationCatcher(self, forRegex: self.dynamicType.notificationRegex, referenceStrength: .Weak)
 	}
 
 	func catchPushNotification(pushNotification: PushNotification) {
@@ -160,25 +160,27 @@ let deepLinkClosure = DeepLinkClosureCatcher(callback: { deepLink -> Bool in [we
     // do some stuff
     return true
 })
-Router.setDeepLinkCatcher(deepLinkClosure, forRegex: "^cool_ass_stuff$")
+Router.setDeepLinkCatcher(deepLinkClosure, forRegex: "^cool_ass_stuff$", referenceStrength: .Strong)
 
 let notificationClosure = PushNotificationClosureCatcher(callback: { notification in [weak self]
     // do some stuff
 })
-Router.setPushNotificationCatcher(notificationClosure, forRegex: "^cool_ass_stuff$")
+Router.setPushNotificationCatcher(notificationClosure, forRegex: "^cool_ass_stuff$", referenceStrength: .Strong)
 ```
 
 <br>
-### :warning: Memory management :warning:
+## :warning: Memory management :warning:
 
-You can decide whether Stargate keeps a strong or a weak reference to your Catcher. With closures you likely want to choose Strong.
+You can decide whether Stargate keeps a `.Strong` or a `.Weak` reference to your Catcher.
 
-Stargate achieves this by using NSMapTable.
+With closures you likely want to choose `.Strong`. Make sure you use `[weak self]` where appropriate.
+
+Stargate achieves its memory management functionality by using `NSMapTable`.
 
 <br>
 ## The delegate
 
-If your ViewController or object that you'd like to handle the `DeepLink` and/or `PushNotification` does not exist at the time of the `DeepLink` or `PushNotification` being opened, you can have a delegate, that will definitely be around (AppDelegate for example), catch the it and do any setup, like, for example, instantiate a ViewController and re-setup its views then call it's `catch` method.
+If your ViewController or object that you'd like to handle the `DeepLink` and/or `PushNotification` does not exist at the time of the `DeepLink` or `PushNotification` being triggered, you can assign a delegate that will definitely be around (AppDelegate for example) to catch it and do any setup, like, for example, instantiate a ViewController and re-setup its views then call it's `catchDeepLink` or `catchPushNotification` method.
 
 With `DeepLink`s you can also use the delegate to setup the view hierarchy when a ViewController exists but its view is not on screen. To do this just return `false` in the callback, like in the example above, which will cause the `Router` to call its delegate. The delegate gets passed the `DeepLink`, therefore it knows which ViewController to get on screen.
 
