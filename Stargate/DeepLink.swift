@@ -20,7 +20,7 @@ import Foundation
     }
     
     public func matchesRegex(regex: Regex) -> Bool {
-        let link = self.url.absoluteString
+        guard let link = self.url.absoluteString else { return false }
         let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
         let numberOfMatches = regex?.numberOfMatchesInString(link, options: [], range: NSMakeRange(0, link.characters.count))
         return numberOfMatches > 0
