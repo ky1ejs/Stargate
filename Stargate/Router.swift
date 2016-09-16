@@ -8,42 +8,41 @@
 
 import Foundation
 
-
 public protocol RouterDelegate: DeepLinkCatcher, PushNotificationCatcher {}
 
 public typealias Regex = String
 
 public protocol Regexable {
-    func matchesRegex(regex: Regex) -> Bool
+    func matchesRegex(_ regex: Regex) -> Bool
 }
 
-private var weakDeepLinkRoutes = NSMapTable.strongToWeakObjectsMapTable()
-private var strongDeepLinkRoutes = NSMapTable.strongToStrongObjectsMapTable()
-private var weakPushNotificationRoutes = NSMapTable.strongToWeakObjectsMapTable()
-private var strongPushNotificationRoutes = NSMapTable.strongToStrongObjectsMapTable()
+private var weakDeepLinkRoutes = NSMapTable<NSString, AnyObject>.strongToWeakObjects()
+private var strongDeepLinkRoutes = NSMapTable<NSString, AnyObject>.strongToStrongObjects()
+private var weakPushNotificationRoutes = NSMapTable<NSString, AnyObject>.strongToWeakObjects()
+private var strongPushNotificationRoutes = NSMapTable<NSString, AnyObject>.strongToStrongObjects()
 
 enum RouteType {
-    case DeepLink
-    case PushNotification
+    case deepLink
+    case pushNotification
 }
 
 public enum ReferenceStrength {
-    case Strong
-    case Weak
+    case strong
+    case weak
     
     var opposite: ReferenceStrength {
         switch self {
-        case .Strong:   return .Weak
-        case .Weak:     return .Strong
+        case .strong:   return .weak
+        case .weak:     return .strong
         }
     }
     
-    func routesForType(type: RouteType) -> NSMapTable {
+    func routesForType(_ type: RouteType) -> NSMapTable<NSString, AnyObject> {
         switch (self, type) {
-        case (.Strong, .DeepLink):          return strongDeepLinkRoutes
-        case (.Weak, .DeepLink):            return weakDeepLinkRoutes
-        case (.Strong, .PushNotification):  return strongPushNotificationRoutes
-        case (.Weak, .PushNotification):    return weakPushNotificationRoutes
+        case (.strong, .deepLink):          return strongDeepLinkRoutes
+        case (.weak, .deepLink):            return weakDeepLinkRoutes
+        case (.strong, .pushNotification):  return strongPushNotificationRoutes
+        case (.weak, .pushNotification):    return weakPushNotificationRoutes
         }
     }
 }
@@ -53,23 +52,23 @@ public struct Router {}
 public extension Router {
     public static weak var delegate: RouterDelegate?
     
-    public static func setDeepLinkCatcher(catcher: DeepLinkCatcher, forRegex regex: Regex, referenceStrength: ReferenceStrength) {
-        referenceStrength.opposite.routesForType(.DeepLink).removeObjectForKey(regex)
-        referenceStrength.routesForType(.DeepLink).setObject(catcher, forKey: regex)
+    public static func setDeepLinkCatcher(_ catcher: DeepLinkCatcher, forRegex regex: Regex, referenceStrength: ReferenceStrength) {
+        referenceStrength.opposite.routesForType(.deepLink).removeObject(forKey: regex as NSString)
+        referenceStrength.routesForType(.deepLink).setObject(catcher, forKey: regex as NSString)
     }
     
-    public static func deepLinkCatcherForRegex(regex: Regex) -> DeepLinkCatcher? {
-        let strongCatcher = strongDeepLinkRoutes.objectForKey(regex) as? DeepLinkCatcher
-        let weakCatcher = weakDeepLinkRoutes.objectForKey(regex) as? DeepLinkCatcher
+    public static func deepLinkCatcherForRegex(_ regex: Regex) -> DeepLinkCatcher? {
+        let strongCatcher = strongDeepLinkRoutes.object(forKey: regex as NSString) as? DeepLinkCatcher
+        let weakCatcher = weakDeepLinkRoutes.object(forKey: regex as NSString) as? DeepLinkCatcher
         return strongCatcher ?? weakCatcher
     }
     
-    public static func unsetDeepLinkCatcherForRegex(regex: Regex) {
-        strongDeepLinkRoutes.removeObjectForKey(regex)
-        weakDeepLinkRoutes.removeObjectForKey(regex)
+    public static func unsetDeepLinkCatcherForRegex(_ regex: Regex) {
+        strongDeepLinkRoutes.removeObject(forKey: regex as NSString)
+        weakDeepLinkRoutes.removeObject(forKey: regex as NSString)
     }
     
-    public static func handleDeepLink(deepLink: DeepLink) -> Bool {
+    public static func handleDeepLink(_ deepLink: DeepLink) -> Bool {
         let strongRoutes = strongDeepLinkRoutes.dictionaryRepresentation() as! [Regex : DeepLinkCatcher]
         let weakRoutes = weakDeepLinkRoutes.dictionaryRepresentation() as! [Regex : DeepLinkCatcher]
         for (key, value) in strongRoutes + weakRoutes {
@@ -82,23 +81,23 @@ public extension Router {
 }
 
 public extension Router {
-    public static func setPushNotificationCatcher(catcher: PushNotificationCatcher, forRegex regex: Regex, referenceStrength: ReferenceStrength) {
-        referenceStrength.opposite.routesForType(.PushNotification).removeObjectForKey(regex)
-        referenceStrength.routesForType(.PushNotification).setObject(catcher, forKey: regex)
+    public static func setPushNotificationCatcher(_ catcher: PushNotificationCatcher, forRegex regex: Regex, referenceStrength: ReferenceStrength) {
+        referenceStrength.opposite.routesForType(.pushNotification).removeObject(forKey: regex as NSString)
+        referenceStrength.routesForType(.pushNotification).setObject(catcher, forKey: regex as NSString)
     }
     
-    public static func pushNotificationCatcherForRegex(regex: Regex) -> PushNotificationCatcher? {
-        let strongCatcher = strongPushNotificationRoutes.objectForKey(regex) as? PushNotificationCatcher
-        let weakCatcher = weakPushNotificationRoutes.objectForKey(regex) as? PushNotificationCatcher
+    public static func pushNotificationCatcherForRegex(_ regex: Regex) -> PushNotificationCatcher? {
+        let strongCatcher = strongPushNotificationRoutes.object(forKey: regex as NSString) as? PushNotificationCatcher
+        let weakCatcher = weakPushNotificationRoutes.object(forKey: regex as NSString) as? PushNotificationCatcher
         return strongCatcher ?? weakCatcher
     }
     
-    public static func removePushNotificationCatcherForRegex(regex: Regex) {
-        strongPushNotificationRoutes.removeObjectForKey(regex)
-        weakPushNotificationRoutes.removeObjectForKey(regex)
+    public static func removePushNotificationCatcherForRegex(_ regex: Regex) {
+        strongPushNotificationRoutes.removeObject(forKey: regex as NSString)
+        weakPushNotificationRoutes.removeObject(forKey: regex as NSString)
     }
     
-    public static func handleNotification(userInfo: PushNotificationPayload) {
+    public static func handleNotification(_ userInfo: PushNotificationPayload) {
         let notification = PushNotification(payload: userInfo)
         let strongCatchers = strongPushNotificationRoutes.dictionaryRepresentation() as! [Regex : PushNotificationCatcher]
         let weakCatchers = weakPushNotificationRoutes.dictionaryRepresentation() as! [Regex : PushNotificationCatcher]

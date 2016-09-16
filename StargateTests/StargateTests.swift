@@ -11,20 +11,20 @@ import XCTest
 
 class StargateTests: XCTestCase {
     func testHTTPURLRouteDeepLink() {
-        let regex = "^https:\\/\\/loot.io\\/verify-waiting-list-email"
+        let regex = "^https:\\/\\/kylejm.io\\/action"
         let deepLinkClosure = DeepLinkClosureCatcher(callback: { (params) -> Bool in return true })
-        Router.setDeepLinkCatcher(deepLinkClosure, forRegex: regex, referenceStrength: .Weak)
-        let url = NSURL(string: "https://loot.io/verify-waiting-list-email")!
+        Router.setDeepLinkCatcher(deepLinkClosure, forRegex: regex, referenceStrength: .weak)
+        let url = URL(string: "https://kylejm.io/action")!
         let called = Router.handleDeepLink(DeepLink(url: url, sourceApplication: nil, annotation: NSObject()))
         XCTAssertTrue(called)
         Router.unsetDeepLinkCatcherForRegex(regex)
     }
     
     func testCustomSchemeDeepLink() {
-        let regex = "^loot://confirm-password-reset-email\\/.*$"
+        let regex = "^kylejm://action\\/.*$"
         let deepLinkClosure = DeepLinkClosureCatcher(callback: { (params) -> Bool in return true })
-        Router.setDeepLinkCatcher(deepLinkClosure, forRegex: regex, referenceStrength: .Weak)
-        let url = NSURL(string: "loot://confirm-password-reset-email/?token=onjk321dash09832gadjdhdh203223ih2io22k")!
+        Router.setDeepLinkCatcher(deepLinkClosure, forRegex: regex, referenceStrength: .weak)
+        let url = URL(string: "kylejm://action/?token=onjk321dash09832gadjdhdh203223ih2io22k")!
         let called = Router.handleDeepLink(DeepLink(url: url, sourceApplication: nil, annotation: NSObject()))
         XCTAssertTrue(called)
         Router.unsetDeepLinkCatcherForRegex(regex)

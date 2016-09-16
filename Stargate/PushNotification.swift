@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias PushNotificationPayload = [NSObject : AnyObject]
+public typealias PushNotificationPayload = [AnyHashable: Any]
 
 private var defaultPushNotificationKey = "notification_id"
 
@@ -19,25 +19,25 @@ private var defaultPushNotificationKey = "notification_id"
         self.payload = payload
     }
     
-    public static func setDefaultPushNotificationKey(key: String) { defaultPushNotificationKey = key }
+    public static func setDefaultPushNotificationKey(_ key: String) { defaultPushNotificationKey = key }
     
-    public func matchesRegex(regex: Regex) -> Bool {
-        if let payload = self.payload["aps"] as? [NSObject : AnyObject], notification = payload[defaultPushNotificationKey] as? String {
-            let regex = try? NSRegularExpression(pattern: regex, options: .CaseInsensitive)
-            let numberOfMatches = regex?.numberOfMatchesInString(notification, options: [], range: NSMakeRange(0, notification.characters.count))
+    public func matchesRegex(_ regex: Regex) -> Bool {
+        if let payload = self.payload["aps"] as? [AnyHashable: Any], let notification = payload[defaultPushNotificationKey] as? String {
+            let regex = try? NSRegularExpression(pattern: regex, options: .caseInsensitive)
+            guard let numberOfMatches = regex?.numberOfMatches(in: notification, options: [], range: NSMakeRange(0, notification.characters.count)) else { return false }
             return numberOfMatches > 0
         }
         return false
     }
 }
 
-@objc public protocol PushNotificationCatcher: class {
-    func catchPushNotification(notification: PushNotification)
+public protocol PushNotificationCatcher: class {
+    func catchPushNotification(_ notification: PushNotification)
 }
 
-public typealias PushNotificationClosure = (notification: PushNotification) -> ()
+public typealias PushNotificationClosure = (_ notification: PushNotification) -> ()
 public class PushNotificationClosureCatcher: PushNotificationCatcher {
     public let callback: PushNotificationClosure
-    public init(callback: PushNotificationClosure) { self.callback = callback }
-    @objc public func catchPushNotification(notification: PushNotification) { self.callback(notification: notification) }
+    public init(callback: @escaping PushNotificationClosure) { self.callback = callback }
+    public func catchPushNotification(_ notification: PushNotification) { self.callback(notification) }
 }
