@@ -1,6 +1,6 @@
 <h1 align="center">Stargate</h1>
 <p align="center">
-    <a href="https://developer.apple.com/swift/" ><img src="https://img.shields.io/badge/Swift-2.2-orange.svg?style=flat"></a>
+    <a href="https://developer.apple.com/swift/" ><img src="https://img.shields.io/badge/Swift-3-orange.svg?style=flat"></a>
     <img src="https://img.shields.io/badge/platform-iOS%208%2B-c775df.svg?style=flat" alt="Platform: iOS 8+">
     <a href="https://github.com/kylejm/Stargate/releases"><img src="https://img.shields.io/github/release/kylejm/Stargate.svg"></a>
     <a href="https://travis-ci.org/kylejm/Stargate"><img src="https://travis-ci.org/kylejm/Stargate.svg?branch=master"></a>
